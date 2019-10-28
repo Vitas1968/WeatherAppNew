@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="error_password">Password must contain at least 8 characters.</string>
+    <string name="weather">Weather</string>
+    <string name="view_weather">Watch weather</string>
+    <string name="tempNameCheckBox">Temperature</string>
+    <string name="windNameCheckBox">Wind</string>
+    <string name="humidityNameCheckBox">Humidity</string>
+    <string name="cityNotInput">You don`t input city</string>
+    <string name="no_data">No data</string>
+    <string name="place_not_found">Place not found</string>
+    <string name="weather_sunny" translatable="false">&#xf00d;</string>
+    <string name="weather_clear_night" translatable="false">&#xf02e;</string>
+    <string name="weather_foggy" translatable="false">&#xf014;</string>
+    <string name="weather_cloudy" translatable="false">&#xf013;</string>
+    <string name="weather_rainy" translatable="false">&#xf019;</string>
+    <string name="weather_snowy" translatable="false">&#xf01b;</string>
+    <string name="weather_thunder" translatable="false">&#xf01e;</string>
+    <string name="weather_drizzle" translatable="false">&#xf01c;</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="input_city">Input city</string>
+    <string name="day_night_mode" translatable="false">Day/Night</string>
+
+
+    <string name="shr_hint_username">Username</string>
+    <string name="shr_hint_password">Password</string>
+    <string name="shr_button_next">Next</string>
+    <string name="shr_button_cancel">Cancel</string>
+    <string name="shr_error_password">Password must contain at least 8 characters.</string>
+    <string name="shr_filter_title">Filter</string>
+    <string name="shr_search_title">Search</string>
+    <string name="shr_product_title">Title</string>
+    <string name="shr_product_description">Secondary text</string>
+    <string name="city_not_found">City not found</string>
 </resources>
