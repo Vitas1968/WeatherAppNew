@@ -7,6 +7,7 @@ import com.example.googlelerning.weather.fragments.LoginFragment;
 import com.example.googlelerning.weather.fragments.ShowWeatherFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationHost {
+    //добавлено в Ветке2
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
