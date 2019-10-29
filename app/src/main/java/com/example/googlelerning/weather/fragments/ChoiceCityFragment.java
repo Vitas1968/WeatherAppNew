@@ -1,12 +1,10 @@
 package com.example.googlelerning.weather.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +21,6 @@ public class ChoiceCityFragment extends Fragment {
     private TextInputEditText inputCity;
     private String city;
     private MaterialButton viewWatherBtn;
-    private LinearLayout lLayout;
 
     @Override
     public View onCreateView(
@@ -84,14 +81,4 @@ public class ChoiceCityFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " должен реализовывать интерфейс OnTransmitCity");
-        }
-    }
 }
