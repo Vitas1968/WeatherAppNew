@@ -1,6 +1,9 @@
 package com.example.googlelerning.weather.fragments;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -31,6 +34,26 @@ public class ShowWeatherFragment extends Fragment {
     private TextView placeName;
     private ArrayList<DataClass> list = new ArrayList<>();
     private Context mContext;
+    private BroadcastReceiver mBroadcastReceiver;
+    public final static String BROADCAST_ACTION ="com.example.googlelerning.weather.fragments.GET_WEATHER";
+
+    private void initBroadcastReceiver(){
+        mBroadcastReceiver = new BroadcastReceiver(){
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+            }
+        };
+        IntentFilter intFiltr = new IntentFilter(BROADCAST_ACTION);
+        Objects.requireNonNull(getActivity()).registerReceiver(mBroadcastReceiver, intFiltr);
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Objects.requireNonNull(getActivity()).unregisterReceiver(mBroadcastReceiver);
+    }
 
     @Override
     public View onCreateView(
