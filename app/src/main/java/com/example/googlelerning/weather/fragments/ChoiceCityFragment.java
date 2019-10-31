@@ -51,7 +51,7 @@ public class ChoiceCityFragment extends Fragment {
                 if (city!=null) {
                     ((NavigationHost) Objects.requireNonNull(getActivity())).navigateTo(new ShowWeatherFragment(), true,city);
                 } else {
-                    Snackbar.make(v, "City not input", Snackbar.LENGTH_LONG)
+                    Snackbar.make(v, "City not enter", Snackbar.LENGTH_LONG)
                             .setAction("CLOSE", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
