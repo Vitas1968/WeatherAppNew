@@ -31,6 +31,20 @@
         tools:hint="Place Name"
         android:textSize="25sp" />
 
+    <TextView
+        android:id="@+id/temp_sensor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/humid_Sensor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="TextView" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
