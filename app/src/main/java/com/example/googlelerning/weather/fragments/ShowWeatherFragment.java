@@ -1,6 +1,10 @@
 package com.example.googlelerning.weather.fragments;
 
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -16,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.googlelerning.weather.NavigationHost;
 import com.example.googlelerning.weather.R;
+import com.example.googlelerning.weather.Sensors;
 import com.example.googlelerning.weather.recicler.BuildDataForRecicler;
 import com.example.googlelerning.weather.recicler.DataClass;
 import com.example.googlelerning.weather.recicler.RecyclerViewAdapter;
@@ -29,8 +34,11 @@ public class ShowWeatherFragment extends Fragment {
     private final Handler handler = new Handler();
     private RecyclerView recycView;
     private TextView placeName;
+    private TextView tempSensor;
+    private TextView humidSensor;
     private ArrayList<DataClass> list = new ArrayList<>();
     private Context mContext;
+    private Sensors mSensors;
 
     @Override
     public View onCreateView(
@@ -40,12 +48,15 @@ public class ShowWeatherFragment extends Fragment {
         view.setTag("showWeatherFragment");
         recycView=view.findViewById(R.id.recycler_view);
         placeName=view.findViewById(R.id.place_name);
+        tempSensor=view.findViewById(R.id.temp_sensor);
+        humidSensor=view.findViewById(R.id.humid_Sensor);
         return view;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setRetainInstance(true);
+        mSensors =new Sensors(getActivity());
     }
 
     @Override
@@ -53,6 +64,62 @@ public class ShowWeatherFragment extends Fragment {
         super.onAttach(context);
         mContext=context;
     }
+    // Слушатель датчика температуры
+    private SensorEventListener listenerTempSensor = new SensorEventListener() {
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            showTempSensor(event);
+        }
+    };
+    private void showTempSensor(SensorEvent event){
+        String currentTemp = "\n" + "Current temperature here: "+ event.values[0];
+        tempSensor.setText(currentTemp);
+
+    }
+
+    // Слушатель датчика влажности
+    private SensorEventListener listenerHumidSensor = new SensorEventListener() {
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            showHumidSensor(event);
+        }
+    };
+
+    private void showHumidSensor(SensorEvent event){
+        String currentHumid = "\n" + "Current humidity here: "+ event.values[0];
+        humidSensor.setText(currentHumid);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Регистрируем слушатель датчика температуры
+        Sensor tempSensor=mSensors.getSensors().get(0);
+        mSensors.getSensorManager().registerListener(listenerTempSensor, tempSensor,
+                SensorManager.SENSOR_DELAY_NORMAL);
+        // Регистрируем слушатель датчика влажности
+        Sensor humidSensor=mSensors.getSensors().get(1);
+        mSensors.getSensorManager().registerListener(listenerHumidSensor, humidSensor,
+                SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        Sensor tempSensor=mSensors.getSensors().get(0);
+        mSensors.getSensorManager().unregisterListener(listenerTempSensor, tempSensor);
+        Sensor humidSensor=mSensors.getSensors().get(1);
+        mSensors.getSensorManager().unregisterListener(listenerHumidSensor, humidSensor);
+    }
+
 
     public void updateWeatherData(final String city) {
         new Thread() {
