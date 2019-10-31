@@ -9,45 +9,45 @@ public class DataClass {
     private String currentTemperatureField;
     private String detailsField;
 
-    public DataClass() {}
+    DataClass() {}
 
     public  String getCityField() {
         return cityField;
     }
 
-    public void setCityField(String cityField) {
+    void setCityField(String cityField) {
         this.cityField = cityField;
     }
 
-    public String getUpdatedField() {
+    String getUpdatedField() {
         return updatedField;
     }
 
-    public void setUpdatedField(String updatedField) {
+    void setUpdatedField(String updatedField) {
         this.updatedField = updatedField;
     }
 
-    public String getWeatherIcon() {
+    String getWeatherIcon() {
         return weatherIcon;
     }
 
-    public void setWeatherIcon(String weatherIcon) {
+    void setWeatherIcon(String weatherIcon) {
         this.weatherIcon = weatherIcon;
     }
 
-    public String getCurrentTemperatureField() {
+    String getCurrentTemperatureField() {
         return currentTemperatureField;
     }
 
-    public void setCurrentTemperatureField(String currentTemperatureField) {
+    void setCurrentTemperatureField(String currentTemperatureField) {
         this.currentTemperatureField = currentTemperatureField;
     }
 
-    public String getDetailsField() {
+    String getDetailsField() {
         return detailsField;
     }
 
-    public void setDetailsField(String detailsField) {
+    void setDetailsField(String detailsField) {
         this.detailsField = detailsField;
     }
 }

@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private ArrayList<DataClass> data = new ArrayList<>();
-    Fragment mFragment;
+    private Fragment mFragment;
 
 
     public RecyclerViewAdapter(ArrayList<DataClass> list, Fragment fragment) {
@@ -54,8 +54,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView weatherIcon;
         TextView currentTemperatureField;
         TextView detailsField;
-        private Typeface weatherFont;
-
 
 
         ViewHolder(View view) {
@@ -67,7 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             initFonts();
         }
         private void initFonts() {
-            weatherFont = Typeface.createFromAsset(Objects.requireNonNull(mFragment.getContext()).getAssets(), "fonts/weather.ttf");
+            Typeface weatherFont = Typeface.createFromAsset(Objects.requireNonNull(mFragment.getContext()).getAssets(), "fonts/weather.ttf");
             weatherIcon.setTypeface(weatherFont);
         }
     }

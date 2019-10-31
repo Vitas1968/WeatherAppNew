@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
             transaction.addToBackStack(null);
         }
         transaction.commit();
-
+        onAttachFragment(fragment);
         if (fragment instanceof ShowWeatherFragment){
-            ((ShowWeatherFragment) fragment).updateWeatherData(city);
+            ((ShowWeatherFragment) fragment).updateWeatherData(city,this);
         }
     }
 }

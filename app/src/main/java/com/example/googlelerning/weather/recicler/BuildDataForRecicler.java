@@ -10,18 +10,16 @@ import java.util.Locale;
 
 public class BuildDataForRecicler {
 
-    private JSONObject mainJSONObject;
     private JSONArray listJSONArray;
     private JSONObject cityJSONObject;
     private static ArrayList<DataClass> list;
     private Context mContext;
 
     public BuildDataForRecicler(JSONObject JSONObject, Context context) {
-        this.mainJSONObject = JSONObject;
         list = new ArrayList<>();
         try {
-            cityJSONObject = mainJSONObject.getJSONObject("city");
-            listJSONArray = mainJSONObject.getJSONArray("list");
+            cityJSONObject = JSONObject.getJSONObject("city");
+            listJSONArray = JSONObject.getJSONArray("list");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -35,10 +33,8 @@ public class BuildDataForRecicler {
     }
 
     private String getDetails(JSONObject jsonObject) throws JSONException {
-        return new StringBuilder().append(jsonObject.getJSONArray("weather").
-                getJSONObject(0).getString("description").toUpperCase()).append("\n")
-                .append("Humidity: ").append(jsonObject.getJSONObject("main").getString("humidity")).append("%").append("\n")
-                .append("Pressure: ").append(jsonObject.getJSONObject("main").getString("pressure")).append("hPa").toString();
+        return jsonObject.getJSONArray("weather").
+                getJSONObject(0).getString("description").toUpperCase() + "\n" + "Humidity: " + jsonObject.getJSONObject("main").getString("humidity") + "%" + "\n" + "Pressure: " + jsonObject.getJSONObject("main").getString("pressure") + "hPa";
     }
 
     private String getCurrentTemp(JSONObject jsonObject) throws JSONException {
