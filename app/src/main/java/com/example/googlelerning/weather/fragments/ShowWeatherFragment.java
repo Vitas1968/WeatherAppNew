@@ -25,12 +25,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
 public class ShowWeatherFragment extends Fragment {
     private final Handler handler = new Handler();
     private RecyclerView recycView;
     private TextView placeName;
     private ArrayList<DataClass> list = new ArrayList<>();
     private Context mContext;
+
+
 
     @Override
     public View onCreateView(
@@ -42,11 +45,13 @@ public class ShowWeatherFragment extends Fragment {
         placeName=view.findViewById(R.id.place_name);
         return view;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setRetainInstance(true);
     }
+
 
     @Override
     public void onAttach(@NonNull Context context) {
