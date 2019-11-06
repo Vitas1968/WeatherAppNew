@@ -20,6 +20,14 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="input_city">Input city</string>
     <string name="day_night_mode" translatable="false">Day/Night</string>
+    <string name="image_icon_desc" translatable="false">Description</string>
+    <string name="item_name" translatable="false">Item name</string>
+    <string-array name="drawer_items">
+        <item>Об авторе</item>
+        <item>О приложении</item>
+        <item>О сервере</item>
+    </string-array>
+
 
 
     <string name="shr_hint_username">Username</string>
@@ -32,4 +40,16 @@
     <string name="shr_product_title">Title</string>
     <string name="shr_product_description">Secondary text</string>
     <string name="city_not_found">City not found</string>
+    <string name="server_description">Описание погодного сервера</string>
+    <string name="author_descript">Об авторе</string>
+    <string name="app_descript">Описание приложения</string>
+    <string name="weather_on_0_hour" translatable="false">Update on 0.00h</string>
+    <string name="weather_on_3_hour" translatable="false">Update on 3.00h</string>
+    <string name="weather_on_6_hour" translatable="false">Update on 6.00h</string>
+    <string name="weather_on_9_hour" translatable="false">Update on 9.00h</string>
+    <string name="weather_on_12_hour" translatable="false">Update on 12.0h</string>
+    <string name="weather_on_15_hour" translatable="false">Update on 15.0h</string>
+    <string name="weather_on_18_hour" translatable="false">Update on 18.0h</string>
+    <string name="weather_on_21_hour" translatable="false">Update on 21.0h</string>
+
 </resources>

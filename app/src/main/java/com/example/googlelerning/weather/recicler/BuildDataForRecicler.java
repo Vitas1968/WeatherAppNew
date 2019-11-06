@@ -15,10 +15,12 @@ public class BuildDataForRecicler {
     private JSONObject cityJSONObject;
     private static ArrayList<DataClass> list;
     private Context mContext;
+    private int updateHour;
 
-    public BuildDataForRecicler(JSONObject JSONObject, Context context) {
+    public BuildDataForRecicler(JSONObject JSONObject, Context context,int updateHour) {
         this.mainJSONObject = JSONObject;
         list = new ArrayList<>();
+        this.updateHour=updateHour;
         try {
             cityJSONObject = mainJSONObject.getJSONObject("city");
             listJSONArray = mainJSONObject.getJSONArray("list");
@@ -99,8 +101,11 @@ public class BuildDataForRecicler {
 
     public ArrayList <DataClass> createListData() throws JSONException {
         for (int i=0; i<listJSONArray.length();i++){
-            DataClass dc=new DataClass();
             JSONObject jsonObject=listJSONArray.getJSONObject(i);
+
+            if(!checkUpdateTime(jsonObject)) continue;
+
+            DataClass dc=new DataClass();
             String details=getDetails(jsonObject);
             dc.setDetailsField(details);
             String cityField = getPlaceName();
@@ -115,5 +120,20 @@ public class BuildDataForRecicler {
 
         }
         return list;
+    }
+
+    private boolean checkUpdateTime(JSONObject jsonObject){
+        if (updateHour==24) return true;
+        String str=null;
+        try {
+             str=jsonObject.getString("dt_txt");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        assert str != null;
+        String[] srcArrString=str.split(" "); //"2019-11-07 06:00:00"
+        String[] arrString=srcArrString[1].split(":");
+        int updHr = Integer.parseInt(arrString[0]);
+        return updateHour == updHr;
     }
 }
