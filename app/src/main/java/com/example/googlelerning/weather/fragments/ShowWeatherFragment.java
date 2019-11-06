@@ -31,6 +31,7 @@ public class ShowWeatherFragment extends Fragment {
     private TextView placeName;
     private ArrayList<DataClass> list = new ArrayList<>();
     private Context mContext;
+    private int updateHour;
 
     @Override
     public View onCreateView(
@@ -38,6 +39,7 @@ public class ShowWeatherFragment extends Fragment {
         View view=inflater.inflate(R.layout.show_weather_fragment, container, false);
         view.setId(R.id.show_weather_fr);
         view.setTag("showWeatherFragment");
+
         recycView=view.findViewById(R.id.recycler_view);
         placeName=view.findViewById(R.id.place_name);
         return view;
@@ -46,6 +48,15 @@ public class ShowWeatherFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setRetainInstance(true);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Bundle bundle=getArguments();
+        if (bundle != null) {
+            updateHour=bundle.getInt("updateHour",24);
+        } else updateHour=24;
     }
 
     @Override
@@ -83,7 +94,7 @@ public class ShowWeatherFragment extends Fragment {
 
     private void launch(JSONObject jsonObject){
         try {
-            list= new BuildDataForRecicler(jsonObject,mContext).createListData();
+            list= new BuildDataForRecicler(jsonObject,mContext,updateHour).createListData();
             setPlaceName(list);
             initRecyclerView();
         } catch (JSONException e) {
