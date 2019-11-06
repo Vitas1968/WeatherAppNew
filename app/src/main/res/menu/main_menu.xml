@@ -1,4 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:checkableBehavior="single">
+    <item
+        android:id="@+id/weather_on_0_hour"
+        android:orderInCategory="10"
+        android:title="@string/weather_on_0_hour"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/weather_on_3_hour"
+        android:orderInCategory="20"
+        android:title="@string/weather_on_3_hour"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/weather_on_6_hour"
+        android:orderInCategory="30"
+        android:title="@string/weather_on_6_hour"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/weather_on_9_hour"
+        android:orderInCategory="40"
+        android:title="@string/weather_on_9_hour"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/weather_on_12_hour"
+        android:orderInCategory="50"
+        android:title="@string/weather_on_12_hour"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/weather_on_15_hour"
+        android:orderInCategory="60"
+        android:title="@string/weather_on_15_hour"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/weather_on_18_hour"
+        android:orderInCategory="70"
+        android:title="@string/weather_on_18_hour"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/weather_on_21_hour"
+        android:orderInCategory="80"
+        android:title="@string/weather_on_21_hour"
+        app:showAsAction="never" />
 
 </menu>
