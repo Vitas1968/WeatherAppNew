@@ -2,7 +2,6 @@ package com.example.googlelerning.weather.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.googlelerning.weather.NavigationHost;
 import com.example.googlelerning.weather.R;
 import com.example.googlelerning.weather.recicler.BuildDataForRecicler;
@@ -23,7 +23,6 @@ import com.example.googlelerning.weather.recicler.DataClass;
 import com.example.googlelerning.weather.recicler.RecyclerViewAdapter;
 import com.example.googlelerning.weather.rest.OpenWeatherRepo;
 import com.example.googlelerning.weather.rest.entities.WeatherRequestRestModel;
-import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -32,7 +31,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ShowWeatherFragment extends Fragment {
-    private final Handler handler = new Handler();
     private RecyclerView recycView;
     private TextView placeName;
     private ArrayList<DataClass> list = new ArrayList<>();
@@ -71,7 +69,7 @@ public class ShowWeatherFragment extends Fragment {
                                            @NonNull Response<WeatherRequestRestModel> response) {
                         if (response.body() != null && response.isSuccessful()) {
                             launch(response.body());
-                        }
+                        } else navigateErrorFragment();
                     }
                     @Override
                     public void onFailure(Call<WeatherRequestRestModel> call, Throwable t) {
