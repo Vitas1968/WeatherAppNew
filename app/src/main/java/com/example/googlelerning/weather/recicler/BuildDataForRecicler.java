@@ -1,61 +1,41 @@
 package com.example.googlelerning.weather.recicler;
 import android.content.Context;
 import com.example.googlelerning.weather.R;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.googlelerning.weather.rest.entities.WeatherRequestRestModel;
+import com.example.googlelerning.weather.rest.entities.WeatherUpdateModel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class BuildDataForRecicler {
-
-    private JSONObject mainJSONObject;
-    private JSONArray listJSONArray;
-    private JSONObject cityJSONObject;
     private static ArrayList<DataClass> list;
     private Context mContext;
+    private WeatherRequestRestModel mWeatherRequestRestModel;
 
-    public BuildDataForRecicler(JSONObject JSONObject, Context context) {
-        this.mainJSONObject = JSONObject;
+    public BuildDataForRecicler(WeatherRequestRestModel weatherRequestRestModel, Context context) {
+        mWeatherRequestRestModel = weatherRequestRestModel;
         list = new ArrayList<>();
-        try {
-            cityJSONObject = mainJSONObject.getJSONObject("city");
-            listJSONArray = mainJSONObject.getJSONArray("list");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         this.mContext=context;
     }
 
-    private String getPlaceName() throws JSONException {
-        return cityJSONObject.getString("name").toUpperCase() + ", "
-                + cityJSONObject.getString("country").toUpperCase();
+    private String getDetails(WeatherUpdateModel wum) {
+        return new StringBuilder().append(wum.getWeatherModel()[0].getDescription().toUpperCase()).append("\n").
+                append("Humidity: ").append(wum.getWeatherMain().getHumidity()).append("%").append("\n").
+                append("Pressure: ").append(wum.getWeatherMain().getPressure()).append("hPa").append("\n").toString();
     }
 
-    private String getDetails(JSONObject jsonObject) throws JSONException {
-        return new StringBuilder().append(jsonObject.getJSONArray("weather").
-                getJSONObject(0).getString("description").toUpperCase()).append("\n")
-                .append("Humidity: ").append(jsonObject.getJSONObject("main").getString("humidity")).append("%").append("\n")
-                .append("Pressure: ").append(jsonObject.getJSONObject("main").getString("pressure")).append("hPa").toString();
+    private String getCurrentTemp(WeatherUpdateModel wum)  {
+        return String.format(Locale.getDefault(), "%.1f", wum.getWeatherMain().getTemp()) + "\u2103";
     }
 
-    private String getCurrentTemp(JSONObject jsonObject) throws JSONException {
-        return String.format(Locale.getDefault(), "%.1f", jsonObject.getJSONObject("main").getDouble("temp")) + "\u2103";
+    private String getUpdatedText(WeatherUpdateModel wum){
+        return "Update: "+wum.getDt_txt();
     }
 
-    private String getUpdatedText(JSONObject jsonObject) throws JSONException {
-        return "Update: "+ jsonObject.getString("dt_txt");
-    }
-
-    private String getWeatherIcon(JSONObject jsonObject) throws JSONException{
-        int actualId=jsonObject.getJSONArray("weather").getJSONObject(0).getInt("id");
-        long sunrise=cityJSONObject.getLong("sunrise");
-        long sunset=cityJSONObject.getLong("sunset");
-
-
-
+    private String getWeatherIcon(WeatherUpdateModel wum) {
+        int actualId= wum.getWeatherModel()[0].getId();
+        long sunrise=mWeatherRequestRestModel.mCityInfoModel.getSunrise();
+        long sunset=mWeatherRequestRestModel.mCityInfoModel.getSunset();
         int id = actualId / 100;
         String icon = "";
 
@@ -97,19 +77,17 @@ public class BuildDataForRecicler {
         return  icon;
     }
 
-    public ArrayList <DataClass> createListData() throws JSONException {
-        for (int i=0; i<listJSONArray.length();i++){
+    public ArrayList <DataClass> createListData() {
+        for (int i=0; i<mWeatherRequestRestModel.mWeatherUpdateModels.length;i++){
             DataClass dc=new DataClass();
-            JSONObject jsonObject=listJSONArray.getJSONObject(i);
-            String details=getDetails(jsonObject);
+            WeatherUpdateModel wum=mWeatherRequestRestModel.mWeatherUpdateModels[i];
+            String details=getDetails(wum);
             dc.setDetailsField(details);
-            String cityField = getPlaceName();
-            dc.setCityField(cityField);
-            String currentTemp=getCurrentTemp(jsonObject);
+            String currentTemp=getCurrentTemp(wum);
             dc.setCurrentTemperatureField(currentTemp);
-            String updateTime=getUpdatedText(jsonObject);
+            String updateTime=getUpdatedText(wum);
             dc.setUpdatedField(updateTime);
-            String icon =getWeatherIcon(jsonObject);
+            String icon =getWeatherIcon(wum);
             dc.setWeatherIcon(icon);
             list.add(dc);
 
