@@ -61,7 +61,7 @@ public class ShowWeatherFragment extends Fragment {
     }
 
     public void updateWeatherData(final String city) {
-        OpenWeatherRepo.getSingleton().getAPI().loadWeather(city + ",ru",
+        OpenWeatherRepo.getSingleton().getAPI().loadWeather(city ,
                 OPEN_WEATHER_API_KEY ,JSON_MODE, UNITS)
                 .enqueue(new Callback<WeatherRequestRestModel>() {
                     @Override
