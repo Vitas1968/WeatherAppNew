@@ -20,6 +20,8 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="input_city">Enter city</string>
     <string name="day_night_mode" translatable="false">Day/Night</string>
+    <string name="network_error" translatable="false">
+Network problems</string>
 
 
     <string name="shr_hint_username">Username</string>
