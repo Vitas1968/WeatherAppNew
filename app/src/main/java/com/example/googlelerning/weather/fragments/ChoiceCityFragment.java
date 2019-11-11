@@ -69,24 +69,7 @@ public class ChoiceCityFragment extends Fragment {
             }
         });
     }
-
-    /*private void setListenerEditText() {
-        inputCity.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(event.getAction() == KeyEvent.ACTION_DOWN &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)){
-                    TextView tv = (TextView) v;
-                    city = tv.getText().toString();
-
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
-     */
+    
     private void setListenerEditText() {
         inputCity.addTextChangedListener(new TextWatcher() {
             @Override
