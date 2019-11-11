@@ -2,6 +2,8 @@ package com.example.googlelerning.weather.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,17 +71,15 @@ public class ChoiceCityFragment extends Fragment {
     }
 
     private void setListenerEditText() {
-        inputCity.setOnKeyListener(new View.OnKeyListener() {
+        inputCity.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(event.getAction() == KeyEvent.ACTION_DOWN &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER)){
-                    TextView tv = (TextView) v;
-                    city = tv.getText().toString();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            @Override
+            public void afterTextChanged(Editable s) {
+                city = s.toString();
 
-                    return true;
-                }
-                return false;
             }
         });
     }
