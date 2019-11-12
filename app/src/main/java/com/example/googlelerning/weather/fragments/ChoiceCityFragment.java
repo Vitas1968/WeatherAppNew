@@ -68,8 +68,7 @@ public class ChoiceCityFragment extends Fragment {
                 }
             }
         });
-    }
-
+    }    
     private void setListenerEditText() {
         inputCity.addTextChangedListener(new TextWatcher() {
             @Override

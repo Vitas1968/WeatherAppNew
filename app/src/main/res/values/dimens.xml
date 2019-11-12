@@ -22,4 +22,5 @@
     <dimen name="updated_font_size">13sp</dimen>
     <dimen name="icon_font_size">80sp</dimen>
     <dimen name="icon_font_size1">40sp</dimen>
+    <dimen name="indents_imageView">16dp</dimen>
 </resources>
