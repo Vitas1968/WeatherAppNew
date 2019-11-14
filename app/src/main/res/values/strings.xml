@@ -34,4 +34,7 @@ Network problems</string>
     <string name="shr_product_title">Title</string>
     <string name="shr_product_description">Secondary text</string>
     <string name="city_not_found">City not found</string>
+    <string name="online">Online</string>
+    <string name="data_base">Data Base</string>
+    <string name="off_online_on_database">Off-online/on-database</string>
 </resources>
