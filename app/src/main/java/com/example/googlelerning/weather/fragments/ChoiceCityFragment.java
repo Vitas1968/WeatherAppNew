@@ -4,12 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Switch;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -25,6 +25,8 @@ public class ChoiceCityFragment extends Fragment {
     private TextInputEditText inputCity;
     private String city;
     private MaterialButton viewWatherBtn;
+    private Switch mSwitch;
+    private boolean flagSwitch=false;
     private LinearLayout lLayout;
 
     @Override
@@ -36,6 +38,7 @@ public class ChoiceCityFragment extends Fragment {
         ininViews(view);
         setListenerEditText();
         setClickListenerButton();
+        setCheckedSwitchListener();
         return view;
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -47,6 +50,16 @@ public class ChoiceCityFragment extends Fragment {
     private void ininViews(View view) {
         inputCity=view.findViewById(R.id.inputCity);
         viewWatherBtn=view.findViewById(R.id.viewWatherBtn);
+        mSwitch=view.findViewById(R.id.switch1);
+    }
+    private void setCheckedSwitchListener(){
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) flagSwitch=true;
+
+            }
+        });
     }
 
     private void setClickListenerButton() {
@@ -54,7 +67,11 @@ public class ChoiceCityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (city!=null) {
-                    ((NavigationHost) Objects.requireNonNull(getActivity())).navigateTo(new ShowWeatherFragment(), true,city);
+                    ShowWeatherFragment swf = new ShowWeatherFragment();
+                    Bundle bundle =new Bundle();
+                    bundle.putBoolean("flagSwitch",flagSwitch);
+                    swf.setArguments(bundle);
+                    ((NavigationHost) Objects.requireNonNull(getActivity())).navigateTo(swf, true,city);
                 } else {
                     Snackbar.make(v, "City not input", Snackbar.LENGTH_LONG)
                             .setAction("CLOSE", new View.OnClickListener() {
